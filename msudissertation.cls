@@ -102,7 +102,7 @@
       \vspace*{-2\topskip}%
       \msudissertation@title{\large}
 
-      \vspace{\fill}
+      \vspace{2.5in}
 
       \begin{center}%
         A \MakeUppercase{\msudissertation@thesis}
