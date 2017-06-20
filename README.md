@@ -8,4 +8,4 @@ Refer to Chapter 1 of [`example.pdf`](https://xrf.github.io/msudissertation-cls/
 
 ## Installation
 
-Put `msudissertation.cls` in either the same directory as your `.tex` file, or in one of your [`texmf` directories](https://en.wikibooks.org/wiki/LaTeX/Installing_Extra_Packages#Installing_a_package).
+Put `msudissertation.cls` in either the same directory as your `.tex` file, or one of your [`texmf` directories](https://en.wikibooks.org/wiki/LaTeX/Installing_Extra_Packages#Installing_a_package).
