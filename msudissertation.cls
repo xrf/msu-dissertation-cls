@@ -34,6 +34,7 @@
 % Packages
 % --------
 
+\RequirePackage[singlelinecheck=false]{caption}
 \RequirePackage{etoolbox}
 \RequirePackage[margin=1in,footskip=0.5in]{geometry}
 \RequirePackage{setspace}               % must be loaded before bookmark/hyperref
@@ -156,6 +157,7 @@
   \msudissertation@frontMatterHead{#1}%
   \vspace{\parskip}%
   \msudissertation@title{}%
+  \vspace{-1.05\topskip}%
 }
 
 % temporary counter for saving front matter page numbers
@@ -351,6 +353,8 @@
   \msudissertation@makeAuxiliaryHead{#1}%
   \vspace{14pt}%
 }
+
+% For natbib
 \pretocmd{\bibliography}{%
   \clearpage
   \phantomsection
@@ -364,9 +368,32 @@
   \vspace{\fill}%
   \clearpage
   \renewcommand{\@makeschapterhead}{\msudissertation@makeBiblioHead}%
-  \begin{singlespace}%
+  \singlespacing
 }{}{}
-\apptocmd{\bibliography}{%
-  \end{singlespace}%
-  \renewcommand{\@chapter}\msudissertation@old@chapter
-}{}{}
+
+% For biblatex
+\newcommand{\msudissertation@bibheading}[1]{%
+  \clearpage
+  \phantomsection
+  \addcontentsline{toc}{chapter}{%
+    \msudissertation@texorpdfstring{\MakeUppercase{#1}}{#1}%
+  }%
+  \nointerlineskip
+  \vspace*{-\topskip}%
+  \vspace{\fill}%
+  \msudissertation@frontMatterHead{#1}%
+  \vspace{\fill}%
+  \clearpage
+  \renewcommand{\@makeschapterhead}{\msudissertation@makeBiblioHead}%
+  \chapter*{\MakeUppercase{#1}}%
+  \markboth{#1}{#1}%
+  \vspace*{-1.2\topskip}%
+  \singlespacing
+  \setlength{\bibitemsep}{0.9\baselineskip}%
+}
+\AtBeginDocument{%
+  \ifdef{\defbibheading}{%
+    \defbibheading{bibliography}[\bibname]{\msudissertation@bibheading{#1}}%
+    \defbibheading{bibintoc}[\bibname]{\msudissertation@bibheading{#1}}%
+  }{}%
+}

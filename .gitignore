@@ -66,6 +66,7 @@ Cargo.lock
 # TeX
 *.aux
 *.bbl
+*.bcf
 *.blg
 *.fdb_latexmk
 *.fls
@@ -73,6 +74,7 @@ Cargo.lock
 *.lot
 *.out
 *.pdf
+*.run.xml
 *.thm
 *.toc
 *Notes.bib
