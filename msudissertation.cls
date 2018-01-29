@@ -35,6 +35,7 @@
 % --------
 
 \RequirePackage[singlelinecheck=false]{caption}
+\RequirePackage{enumitem}
 \RequirePackage{etoolbox}
 \RequirePackage[margin=1in,footskip=0.5in]{geometry}
 \RequirePackage{setspace}               % must be loaded before bookmark/hyperref
@@ -48,6 +49,8 @@
 % double-space in Word = 0.391" (37.5px @ 96 DPI)
 \renewcommand{\doublespacing}{\setstretch{1.865}}
 \doublespacing
+\let\tightlist\relax                    % used by Pandoc
+\setlist{nosep}                         % remove extraneous spacing
 \pagestyle{plain}
 \DeclareMathSizes{12}{12}{10}{10}
 \AtBeginDocument{%
@@ -230,6 +233,14 @@
 \renewcommand{\@makechapterhead}[1]{\msudissertation@makeAuxiliaryHead{#1}}
 \renewcommand{\@makeschapterhead}[1]{\msudissertation@makeAuxiliaryHead{#1}}
 
+\let\msudissertation@oldList\list
+\apptocmd{\list}{%
+  \apptocmd{\item}{%
+    \singlespacing
+    \vspace{-0.1\baselineskip}%
+  }{}{}%
+}{}{}
+
 \renewcommand{\cftpartleader}{\cftdotfill{\cftdotsep}}
 \renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
 \renewcommand{\cfttabpresnum}{\tablename{} }
@@ -245,8 +256,6 @@
 \renewcommand{\cftfigafterpnum}{\vspace{12pt}}
 
 \renewcommand{\contentsname}{Table of Contents}
-\let\msudissertation@oldList\list
-\apptocmd{\list}{\singlespacing}{}{}
 % tocloft overwrites these AtBeginDocument, so we have to do the same
 \AtBeginDocument{%
   \renewcommand{\tableofcontents}{%
